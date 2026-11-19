@@ -89,7 +89,7 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
                         <ul className="space-y-0.5">
                             {g.items.map(({ t, i: Icon, href, badge }) => {
                                 const on = actual === href;
-                                const cls = `group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[14px] transition-colors ${on ? 'bg-brand-50 font-medium text-brand' : 'text-text/80 hover:bg-paper hover:text-brand'}`;
+                                const cls = `group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[14px] font-semibold transition-colors ${on ? 'bg-brand-50 text-brand' : 'text-text/80 hover:bg-paper hover:text-brand'}`;
                                 const inner = (<>
                                     {on && <span aria-hidden className="absolute -left-3 top-1.5 h-6 w-1 rounded-r bg-brand" />}
                                     <Icon className={`size-[18px] shrink-0 ${on ? 'text-brand' : 'text-muted group-hover:text-brand'}`} />
