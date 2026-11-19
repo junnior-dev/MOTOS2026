@@ -55,3 +55,20 @@ dirección fiscal y la tasa del día. Al terminar te manda a `/login`.
   `.env.example` a `.env`, ajusta `DB_*` y ejecuta `php artisan key:generate`.
 - El esquema no usa migraciones de Laravel: se instala con los archivos de
   `database/sql/` y se precargan catálogos con `php artisan db:seed`.
+
+## Modo desarrollo (cambios sin recargar)
+
+```powershell
+npm run dev
+```
+
+Vite sirve los assets en <http://127.0.0.1:5173> y escribe el archivo
+`public/hot`. Laravel lo detecta y usa ese servidor: los cambios se aplican en
+caliente, sin recargar ni recompilar.
+
+- Mientras Vite corre, `public/hot` **debe existir**. Si cierras Vite, borra el
+  archivo (`Remove-Item public\hot`) o el navegador seguirá buscando el puerto
+  5173 y la página saldrá en blanco.
+- Para volver al modo normal (lo que usa `INICIAR.cmd`): `npm run build` y
+  comprobar que no quede `public\hot`.
+

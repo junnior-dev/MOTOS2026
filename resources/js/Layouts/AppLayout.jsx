@@ -149,7 +149,7 @@ export default function AppLayout({ actual, titulo, subtitulo, usuario, negocio,
                         {subtitulo && <p className="hidden truncate text-[13px] text-muted sm:block">{subtitulo}</p>}
                     </div>
                     <div className="ml-auto flex items-center gap-2 sm:gap-3">
-                        {!ancho && <label className="relative hidden md:block">
+                        {actual !== '/caja' && <label className="relative hidden md:block">
                             <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
                             <input type="search" placeholder="Buscar repuesto, SKU o factura" className="h-10 w-64 rounded-lg border border-line bg-paper pl-9 pr-3 text-sm placeholder:text-[#8d97a2] focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand xl:w-80" />
                         </label>}
