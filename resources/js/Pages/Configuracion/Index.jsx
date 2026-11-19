@@ -393,7 +393,7 @@ export default function Configuracion(p) {
     return (
         <AppLayout actual="/configuracion" titulo="Configuración" subtitulo="Los datos y reglas de tu negocio, en un solo lugar" {...{ usuario, negocio: d.negocio, stockBajo: stock_bajo, tasaUsd: tasa_usd }}>
             <Head title="Configuración" />
-            <div className="mx-auto max-w-[1120px]">
+            <div className="w-full">
                 <Estado lista={d.checklist} />
                 <div className="mt-6 grid items-start gap-6 lg:grid-cols-[210px_minmax(0,1fr)]">
                     <nav aria-label="Secciones de la configuración" className="sticky top-[88px] z-10 -mx-4 flex gap-1 overflow-x-auto bg-paper/95 px-4 py-2 backdrop-blur lg:mx-0 lg:flex-col lg:overflow-visible lg:bg-transparent lg:p-0">
