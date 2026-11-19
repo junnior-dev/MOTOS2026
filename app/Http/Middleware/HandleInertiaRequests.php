@@ -21,7 +21,19 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'flash' => ['ok' => fn () => $request->session()->get('ok')],
             'tasa_usd' => fn () => $this->tasaUsd(),
+            'rif_negocio' => fn () => $this->rifNegocio(),
         ];
+    }
+
+    /** RIF del negocio para la ficha de la barra lateral. Null mientras no esté configurado. */
+    private function rifNegocio(): ?string
+    {
+        try {
+            $rif = \Illuminate\Support\Facades\DB::table('negocio')->where('id', 1)->value('rif');
+            return $rif ? trim((string) $rif) : null;
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     /** Tasa oficial vigente del dólar para el badge del encabezado en todas las pantallas. */

@@ -62,6 +62,7 @@ const MENU = [
 ];
 
 function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
+    const { rif_negocio } = usePage().props;
     // El cajero solo ve lo que le toca (App\Support\Permisos): vender, sus ventas y su caja.
     const admin = /admin/i.test(usuario.rol || '');
     // Tienda única: la parte fiscal/contable/ISLR está siempre disponible (la marca
@@ -77,9 +78,9 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
                 {cerrar && <button onClick={cerrar} aria-label="Cerrar menú" className="grid size-9 place-items-center rounded-md text-muted hover:bg-paper hover:text-text"><X className="size-5" /></button>}
             </div>
 
-            <div className="mx-3 mb-2 rounded-lg border border-line bg-paper px-3 py-2.5">
-                <p className="truncate text-sm font-medium text-text">{negocio}</p>
-                <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted"><span className="size-1.5 rounded-full bg-ok" />Caja 1 abierta</p>
+            <div className="mx-3 mb-2 rounded-lg border border-line bg-paper px-3 py-2.5 text-center">
+                <p className="truncate text-sm font-semibold text-text" title={negocio}>{negocio}</p>
+                {rif_negocio && <p className="mt-0.5 text-xs text-muted"><span className="num">{rif_negocio}</span></p>}
             </div>
 
             <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-3" aria-label="Menú principal">
