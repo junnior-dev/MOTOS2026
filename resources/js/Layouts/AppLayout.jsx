@@ -68,33 +68,33 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
     // `fiscal` de cada ítem es cosmética y ya no oculta nada).
     const grupos = MENU.map((g) => ({ ...g, items: g.items.filter((i) => admin || !i.admin) })).filter((g) => g.items.length);
     return (
-        <div className="flex h-full flex-col text-white" style={{ background: 'linear-gradient(180deg,#10141a 0%,#0b0e12 100%)' }}>
+        <div className="flex h-full flex-col border-r border-line bg-white text-text">
             <div className="flex h-16 shrink-0 items-center justify-between px-5">
                 <div className="flex items-center gap-2.5">
-                    <span className="grid size-9 place-items-center rounded-lg bg-white/10"><Wrench className="size-[18px]" /></span>
-                    <span className="text-[15px] font-semibold tracking-tight">Repuestos de motos</span>
+                    <span className="grid size-9 place-items-center rounded-lg bg-ink text-white"><Wrench className="size-[18px]" /></span>
+                    <span className="text-[15px] font-semibold tracking-tight text-text">Repuestos de motos</span>
                 </div>
-                {cerrar && <button onClick={cerrar} aria-label="Cerrar menú" className="grid size-9 place-items-center rounded-md hover:bg-white/10"><X className="size-5" /></button>}
+                {cerrar && <button onClick={cerrar} aria-label="Cerrar menú" className="grid size-9 place-items-center rounded-md text-muted hover:bg-paper hover:text-text"><X className="size-5" /></button>}
             </div>
 
-            <div className="mx-3 mb-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5">
-                <p className="truncate text-sm font-medium">{negocio}</p>
-                <p className="mt-0.5 flex items-center gap-1.5 text-xs text-white/55"><span className="size-1.5 rounded-full bg-[#3ddc84]" />Caja 1 abierta</p>
+            <div className="mx-3 mb-2 rounded-lg border border-line bg-paper px-3 py-2.5">
+                <p className="truncate text-sm font-medium text-text">{negocio}</p>
+                <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted"><span className="size-1.5 rounded-full bg-ok" />Caja 1 abierta</p>
             </div>
 
             <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-3" aria-label="Menú principal">
                 {grupos.map((g) => (
                     <div key={g.grupo}>
-                        <p className="px-3 pb-1.5 text-xs font-medium text-white/40">{g.grupo}</p>
+                        <p className="px-3 pb-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">{g.grupo}</p>
                         <ul className="space-y-0.5">
                             {g.items.map(({ t, i: Icon, href, badge }) => {
                                 const on = actual === href;
-                                const cls = `group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[14px] transition-colors ${on ? 'bg-white/10 font-medium text-white' : 'text-white/65 hover:bg-white/[0.06] hover:text-white'}`;
+                                const cls = `group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[14px] transition-colors ${on ? 'bg-brand-50 font-medium text-brand' : 'text-text/80 hover:bg-paper hover:text-brand'}`;
                                 const inner = (<>
-                                    {on && <span aria-hidden className="absolute -left-3 top-1.5 h-6 w-1 rounded-r bg-[#4f7cff]" />}
-                                    <Icon className={`size-[18px] shrink-0 ${on ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`} />
+                                    {on && <span aria-hidden className="absolute -left-3 top-1.5 h-6 w-1 rounded-r bg-brand" />}
+                                    <Icon className={`size-[18px] shrink-0 ${on ? 'text-brand' : 'text-muted group-hover:text-brand'}`} />
                                     <span className="flex-1 truncate">{t}</span>
-                                    {badge === 'stock' && stockBajo > 0 && <span className="rounded-full bg-signal/20 px-2 py-0.5 text-xs font-semibold text-signal" title="Productos con stock bajo">{stockBajo}</span>}
+                                    {badge === 'stock' && stockBajo > 0 && <span className="rounded-full bg-signal/15 px-2 py-0.5 text-xs font-semibold text-[#8a6100]" title="Productos con stock bajo">{stockBajo}</span>}
                                 </>);
                                 return <li key={t} data-tour={NAV_TOUR[href]}>{on ? <Link href={href} className={cls} aria-current="page">{inner}</Link> : <a href={href} className={cls}>{inner}</a>}</li>;
                             })}
@@ -103,13 +103,13 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
                 ))}
             </nav>
 
-            <div className="border-t border-white/10 p-3">
+            <div className="border-t border-line p-3">
                 <div className="flex items-center gap-3 rounded-lg px-2 py-2">
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand text-sm font-semibold">{usuario.nombre.split(' ').map((p) => p[0]).slice(0, 2).join('')}</span>
-                    <div className="min-w-0 flex-1"><p className="truncate text-sm font-medium">{usuario.nombre}</p><p className="text-xs text-white/50">{usuario.rol}</p></div>
-                    {verGuia && <button onClick={verGuia} aria-label="Ver guía de nuevo" title="Ver guía de nuevo" className="grid size-9 place-items-center rounded-md text-white/60 hover:bg-white/10 hover:text-white"><CircleHelp className="size-[18px]" /></button>}
-                    <Link href="/cuenta/contrasena" aria-label="Cambiar mi contraseña" title="Cambiar mi contraseña" className="grid size-9 place-items-center rounded-md text-white/60 hover:bg-white/10 hover:text-white"><KeyRound className="size-[18px]" /></Link>
-                    <button onClick={() => router.post('/logout')} aria-label="Cerrar sesión" title="Cerrar sesión" className="grid size-9 place-items-center rounded-md text-white/60 hover:bg-white/10 hover:text-white"><LogOut className="size-[18px]" /></button>
+                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand text-sm font-semibold text-white">{usuario.nombre.split(' ').map((p) => p[0]).slice(0, 2).join('')}</span>
+                    <div className="min-w-0 flex-1"><p className="truncate text-sm font-medium text-text">{usuario.nombre}</p><p className="text-xs text-muted">{usuario.rol}</p></div>
+                    {verGuia && <button onClick={verGuia} aria-label="Ver guía de nuevo" title="Ver guía de nuevo" className="grid size-9 place-items-center rounded-md text-muted hover:bg-paper hover:text-brand"><CircleHelp className="size-[18px]" /></button>}
+                    <Link href="/cuenta/contrasena" aria-label="Cambiar mi contraseña" title="Cambiar mi contraseña" className="grid size-9 place-items-center rounded-md text-muted hover:bg-paper hover:text-brand"><KeyRound className="size-[18px]" /></Link>
+                    <button onClick={() => router.post('/logout')} aria-label="Cerrar sesión" title="Cerrar sesión" className="grid size-9 place-items-center rounded-md text-muted hover:bg-paper hover:text-brand"><LogOut className="size-[18px]" /></button>
                 </div>
             </div>
         </div>
