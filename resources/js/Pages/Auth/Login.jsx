@@ -1,24 +1,35 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowRight, Lock, User } from 'lucide-react';
+import { ArrowRight, Boxes, Coins, Lock, ReceiptText, ShieldCheck, User } from 'lucide-react';
 import AuthLayout from '../../Layouts/AuthLayout';
 import { Button, Field, PasswordField } from '../../Components/ui';
-import Ticket from '../../Components/Ticket';
 
-const MONEDAS = [['$', 'Dólar'], ['€', 'Euro'], ['COP', 'Peso colombiano'], ['Bs', 'Bolívar']];
+/* Columna informativa del login: solo iconos y texto, sin mockups ni animaciones. */
+const PUNTOS = [
+    [ReceiptText, 'Facturación clara, sin calcular', 'El IVA, el IGTF y la tasa del día se aplican solos. La factura no cambia aunque el BCV mueva la tasa mañana.'],
+    [Boxes, 'Inventario al día', 'Cada repuesto vendido descuenta el stock en el momento. Ves lo que falta antes de que el cliente lo pida.'],
+    [Coins, 'Cobros en varias monedas', 'Bolívares, dólares, euros y pesos en una misma factura, con el vuelto y la tasa bien calculados.'],
+    [ShieldCheck, 'Cada quien ve lo suyo', 'El cajero cobra y cierra su turno; tú revisas costos, compras y reportes. Todo queda registrado.'],
+];
+
 const Aside = () => (
     <>
-        <h2 className="max-w-[26ch] text-[26px] font-semibold leading-[1.15] tracking-[-0.02em]">Cobra en dólares, euros, pesos y bolívares, sin calculadora.</h2>
-        <p className="mt-2 max-w-[48ch] text-[14px] leading-relaxed text-white/65">
-            Una misma factura puede pagarse con varias monedas. El sistema suma el IVA y el IGTF y guarda la tasa de cada una.
+        <h2 className="max-w-[22ch] text-[32px] font-semibold leading-[1.12] tracking-[-0.02em]">
+            Menos cuentas a mano. Más tiempo en el mostrador.
+        </h2>
+        <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-white/65">
+            Ventas, inventario y cobros en un solo lugar. Pensado para el día a día de una tienda de repuestos: rápido cuando hay fila y ordenado al cerrar la caja.
         </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-            {MONEDAS.map(([s, n]) => (
-                <li key={n} className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] py-1 pl-1 pr-3 text-[13px] text-white/85">
-                    <span className="grid h-6 min-w-6 place-items-center rounded-full bg-white/10 px-1.5 text-[11px] font-semibold">{s}</span>{n}
+        <ul className="mt-7 space-y-5">
+            {PUNTOS.map(([Icon, titulo, texto]) => (
+                <li key={titulo} className="flex gap-4">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.06] text-white"><Icon className="size-5" /></span>
+                    <span>
+                        <span className="block text-[15px] font-medium">{titulo}</span>
+                        <span className="mt-0.5 block max-w-[40ch] text-sm leading-relaxed text-white/55">{texto}</span>
+                    </span>
                 </li>
             ))}
         </ul>
-        <div className="mt-5"><Ticket /></div>
     </>
 );
 

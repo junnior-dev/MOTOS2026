@@ -34,26 +34,12 @@
     white-space: nowrap;
 }
 
-/* Borde dentado tipo ticket, abajo */
-.ticket-edge {
-    --s: 8px;
-    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--s) 100%;
-}
-
 @keyframes print-in {
     from { transform: translateY(-14px); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 .print-in { animation: print-in .7s cubic-bezier(.2,.7,.2,1) both; }
 @media (prefers-reduced-motion: reduce) { .print-in { animation: none; } }
-
-/* El ticket sale de la impresora y se detiene */
-@keyframes print-out {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-}
-.print-out { animation: print-out 3.4s steps(80, end) .5s both; }
-@media (prefers-reduced-motion: reduce) { .print-out { animation: none; } }
 
 /* ── Tour de bienvenida (driver.js): popover de ALTO CONTRASTE ──
    Blanco puro, tipografía grande y oscura, botones del color de la marca:
