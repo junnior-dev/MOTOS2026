@@ -80,7 +80,7 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
 
             <div className="px-5 pb-4 pt-1 text-center">
                 <p className="truncate text-[15px] font-semibold leading-tight tracking-[-0.01em] text-white" title={negocio}>{negocio}</p>
-                {rif_negocio && <p className="mt-1 text-[12.5px] leading-none tabular-nums tracking-[0.04em] text-white/45">{rif_negocio}</p>}
+                {rif_negocio && <p className="mt-1 text-[12.5px] leading-none tabular-nums tracking-[0.04em] text-white">{rif_negocio}</p>}
             </div>
 
             <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-3" aria-label="Menú principal">
