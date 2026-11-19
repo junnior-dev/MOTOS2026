@@ -1,0 +1,100 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+    --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    --color-ink: #12171c;
+    --color-ink-2: #1b2229;
+    --color-ink-line: #2a333c;
+    --color-paper: #f5f6f8;
+    --color-line: #d9dee4;
+    --color-text: #161b21;
+    --color-muted: #5b6672;
+    --color-brand: #1e4fd6;
+    --color-brand-600: #1840b3;
+    --color-brand-50: #eaf0ff;
+    --color-signal: #f2a900;
+    --color-danger: #c4291f;
+    --color-ok: #14804a;
+}
+
+@layer base {
+    html { font-feature-settings: "cv11", "ss03"; }
+    body { @apply bg-paper font-sans text-text antialiased; }
+    :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+}
+
+/* Montos: tabular + mono, como en los tickets: cada cifra alinea en columna y
+   ninguna cantidad «baila» al refrescar (Caja en vivo). El tracking negativo
+   compensa el ancho extra del monoespaciado. */
+.num {
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+/* Borde dentado tipo ticket, abajo */
+.ticket-edge {
+    --s: 8px;
+    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--s) 100%;
+}
+
+@keyframes print-in {
+    from { transform: translateY(-14px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+.print-in { animation: print-in .7s cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) { .print-in { animation: none; } }
+
+/* El ticket sale de la impresora y se detiene */
+@keyframes print-out {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+.print-out { animation: print-out 3.4s steps(80, end) .5s both; }
+@media (prefers-reduced-motion: reduce) { .print-out { animation: none; } }
+
+/* ── Tour de bienvenida (driver.js): popover de ALTO CONTRASTE ──
+   Blanco puro, tipografía grande y oscura, botones del color de la marca:
+   se lee bien sobre cualquier pantalla, incluso con el fondo a media luz. */
+:root { --driver-raised-highlight-color: #1e4fd6; --driver-raised-highlight-width: 3px; }
+.tour-popover.driver-popover {
+    max-width: 370px; min-width: 310px; padding: 20px;
+    border-radius: 16px; border: 1px solid rgba(30, 79, 214, .30);
+    box-shadow: 0 24px 64px rgba(2, 6, 12, .50), 0 0 0 4px rgba(30, 79, 214, .12);
+    font-family: inherit;
+}
+.tour-popover .driver-popover-title {
+    font-size: 17px; font-weight: 700; letter-spacing: -.01em;
+    color: #0b1220; padding-right: 30px;
+}
+.tour-popover .driver-popover-description {
+    margin-top: 8px; font-size: 14.5px; line-height: 1.6;
+    color: #263243; font-weight: 450;
+}
+.tour-popover .driver-popover-progress-text {
+    font-size: 12.5px; font-weight: 700; color: #1e4fd6;
+    background: #eaf0ff; border-radius: 999px; padding: 4px 11px; white-space: nowrap;
+}
+.tour-popover .driver-popover-close-btn {
+    color: #1e4fd6; background: #eaf0ff; border-radius: 999px;
+    width: 28px; height: 28px; font-size: 19px; font-weight: 700;
+}
+.tour-popover .driver-popover-close-btn:hover, .tour-popover .driver-popover-close-btn:focus-visible { background: #d9e4ff; color: #1840b3; }
+.tour-popover .driver-popover-footer { margin-top: 16px; align-items: center; }
+.tour-popover .driver-popover-footer-btn,
+.tour-popover .driver-popover-navigation-btns button {
+    border: none !important; border-radius: 10px;
+    padding: 8px 18px !important; font-size: 14px !important; font-weight: 600 !important;
+    transition: background-color .15s ease-in-out;
+}
+.tour-popover .driver-popover-prev-btn {
+    background: #eef1f6 !important; color: #263243 !important;
+}
+.tour-popover .driver-popover-prev-btn:hover, .tour-popover .driver-popover-prev-btn:focus-visible { background: #dde3ec !important; }
+.tour-popover .driver-popover-next-btn {
+    background: #1e4fd6 !important; color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(30, 79, 214, .40);
+}
+.tour-popover .driver-popover-next-btn:hover, .tour-popover .driver-popover-next-btn:focus-visible { background: #1840b3 !important; }
