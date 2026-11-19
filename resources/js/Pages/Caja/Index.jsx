@@ -159,7 +159,7 @@ export default function Caja(p) {
     };
 
     return (
-        <AppLayout actual="/caja" titulo="Punto de venta" subtitulo={fecha_larga} {...{ usuario, negocio, stockBajo: stock_bajo, tasaUsd: tasa_usd }} ancho>
+        <AppLayout actual="/caja" titulo="Punto de venta" subtitulo={fecha_larga} {...{ usuario, negocio, stockBajo: stock_bajo, tasaUsd: tasa_usd }}>
             <Head title="Punto de venta" />
             {estado !== 'ok' ? <Bloqueo estado={estado} /> : (
                 <>

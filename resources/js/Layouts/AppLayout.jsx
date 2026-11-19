@@ -116,7 +116,7 @@ function Sidebar({ actual, usuario, negocio, stockBajo, verGuia, cerrar }) {
     );
 }
 
-export default function AppLayout({ actual, titulo, subtitulo, usuario, negocio, tasaUsd, stockBajo = 0, alertas = 0, ancho = false, children }) {
+export default function AppLayout({ actual, titulo, subtitulo, usuario, negocio, tasaUsd, stockBajo = 0, alertas = 0, children }) {
     const [abierto, setAbierto] = useState(false);
     // Guía de bienvenida: si el usuario aún no la vio, la pantalla cubre TODO
     // (el panel queda oculto detrás, pero YA renderizado: el paso 1 del tour
@@ -162,7 +162,7 @@ export default function AppLayout({ actual, titulo, subtitulo, usuario, negocio,
                         <a href="/caja" className="inline-flex h-10 items-center gap-2 rounded-lg bg-brand px-4 text-sm font-semibold text-white hover:bg-brand-600"><Plus className="size-4" /><span className="hidden sm:inline">Nueva venta</span></a>
                     </div>
                 </header>
-                <main className={`mx-auto min-w-0 px-4 sm:px-6 lg:px-8 ${ancho ? 'max-w-[1680px] py-4' : 'max-w-[1280px] py-6'}`}>{children}</main>
+                <main className="mx-auto min-w-0 max-w-[1680px] px-4 py-4 sm:px-6 lg:px-8">{children}</main>
             </div>
             {primeraVez && !enTour && (
                 <Bienvenida nombre={usuario.nombre} rol={usuario.rol}
